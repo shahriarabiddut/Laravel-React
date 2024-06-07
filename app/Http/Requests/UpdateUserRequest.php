@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Password;
 
-class SignupRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +22,10 @@ class SignupRequest extends FormRequest
     public function rules(): array
     {
         return [
+            //
             'name' => 'required|string|max:55',
-            'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i|unique:users,email',
-            'password' => ['required', Password::min(8)->letters()->symbols(), 'confirmed'],
+            'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i|unique:users,email,' . $this->id,
+            'password' => 'string|min:8|confirmed',
         ];
     }
 }

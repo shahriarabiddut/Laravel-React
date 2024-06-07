@@ -25,9 +25,9 @@ export default function Login() {
                 const response = err.response; 
                 if(response && response.status === 422){
                   if(response.data.errors){
-                    setErrors(['Invalid Email or Password!']);
-                  }else{
-                    setErrors({
+                      setErrors( {email : ['Invalid Email or Password!']});
+                    }else{
+                      setErrors({
                       email : [response.data.message]});
                   }
                 }
