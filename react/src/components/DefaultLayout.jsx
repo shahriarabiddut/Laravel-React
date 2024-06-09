@@ -4,7 +4,7 @@ import axiosClient from '../axios-client';
 import { useStateContext } from '../context/ContextProvider';
 
 export default function DefaultLayout() {
-  const {user,token,setUser,setToken} = useStateContext();
+  const {user,token,notification,setUser,setToken} = useStateContext();
   if(!token){
     return <Navigate to="/login" />
   }
@@ -37,7 +37,13 @@ export default function DefaultLayout() {
             <a href="#" onClick={onLogout} className='btn-logout'>Logout</a>
           </div>
         </header>
-        <main><Outlet /></main>
+        <main>
+        {notification && <div className="notification">
+            {notification}
+          </div> }
+          <Outlet />
+          
+          </main>
       </div>
     </div>
   )
